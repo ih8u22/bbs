@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.bbs.mapper.UserMapper">
+
+
+    <update id="updateUserInfoByID" parameterType="me.bbs.mapper.UserMapper">
+        UPDATE user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="hobby != null">
+                hobby = #{hobby},
+            </if>
+            <if test="occupation != null">
+                occupation = #{occupation},
+            </if>
+
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+
+            <if test="role != null">
+                role = #{role},
+            </if>
+
+            <if test="points != null">
+                points = #{points}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryUsers" parameterType="me.bbs.pojo.UserQueryRequest" resultType="me.bbs.pojo.User">
+        SELECT * FROM user
+        <where>
+
+            <if test="username != null and username != ''">
+                AND username LIKE concat('%','${username}','%')
+            </if>
+            <if test="email != null and email != ''">
+                AND email = #{email}
+            </if>
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+            <if test="ageStart != null">
+                AND age &gt;= #{ageStart}
+            </if>
+            <if test="ageEnd!= null">
+                AND age &lt;= #{ageEnd}
+            </if>
+            <if test="pointsStart != null">
+                AND points &gt;= #{pointsStart}
+            </if>
+            <if test="pointsEnd != null">
+                AND points &lt;= #{pointsEnd}
+            </if>
+
+            <if test="gradeStart != null">
+                AND grade &gt;= #{gradeStart}
+            </if>
+            <if test="pointsEnd != null">
+                AND grade &lt;= #{gradeEnd}
+            </if>
+
+            <if test="hobby != null and hobby != ''">
+                AND hobby LIKE concat('%','${hobby}','%')
+            </if>
+            <if test="occupation != null and occupation != ''">
+                AND occupation LIKE concat('%','${occupation}','%')
+            </if>
+            <if test="role != null ">
+                AND role = #{role}
+            </if>
+        </where>
+        ORDER BY id
+    </select>
+</mapper>
