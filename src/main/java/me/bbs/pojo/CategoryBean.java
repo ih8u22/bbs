@@ -6,14 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * 查询所有用户的封装
- */
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPageBean {
+public class CategoryBean {
     private Integer total;
-    private List<User> rows;
+    private List<Category> rows;
 }
